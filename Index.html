@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Nanagaru!</title>
+  <meta name="description" content=“HBD” />
+    <link rel="icon" type="image/jpg" href="logo.jpg" />
+    <link rel="apple-touch-icon" href="logo.jpg" />
+  <style>
+    /* Reset default browser styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Basic styling for the body and container */
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #ffafbd, #ffc3a0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+      color: black;
+      padding: 20px;
+      z-index: 5;
+    }
+
+    /* Styling the greeting card */
+    .greeting-card {
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 30px;
+      border-radius: 15px;
+      width: 300px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .greeting-card h1 {
+      font-size: 2.5em;
+      margin-bottom: 15px;
+      color: #ff5e78;
+      animation: fadeIn 2s;
+    }
+
+    .greeting-card p {
+      font-size: 1em;
+      margin: 10px 0;
+    }
+
+    button {
+      background: #ff5e78;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    button:hover {
+      background: #ff3b57;
+    }
+
+    /* Balloon Styling */
+    .balloons {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      z-index: 4;
+    }
+
+    .balloon {
+      width: 60px;
+      height: 80px;
+      background-color: #ff6363;
+      border-radius: 50% 50% 50% 50%;
+      position: absolute;
+      bottom: -100px;
+      animation: floatUp 8s ease-in-out infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Balloon Reflective effect */
+    .balloon::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      width: 15px;
+      height: 15px;
+      background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+    }
+
+    /* Balloon string */
+    .balloon::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      width: 2px;
+      height: 20px;
+      background-color: #aaa;
+    }
+
+    /* Balloon Colors */
+    .balloon1 { background-color: #f06292; animation-delay: 0s; left: 10%; }
+    .balloon2 { background-color: #ff8a65; animation-delay: 1s; left: 30%; }
+    .balloon3 { background-color: #ffd54f; animation-delay: 2s; left: 50%; }
+    .balloon4 { background-color: #4db6ac; animation-delay: 3s; left: 70%; }
+    .balloon5 { background-color: #9575cd; animation-delay: 4s; left: 90%; }
+    .balloon6 { background-color: #bf6a86; animation-delay: 1s; left: 5%; }
+    .balloon7 { background-color: #9be55e; animation-delay: 2s; left: 25%; }
+    .balloon8 { background-color: #644fff; animation-delay: 3s; left: 45%; }
+
+    /* Keyframe animation for floating balloons */
+    @keyframes floatUp {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-200px) rotate(10deg); }
+      100% { transform: translateY(-800px) rotate(-10deg); }
+    }
+
+    /* Confetti effect styling */
+    .confetti {
+      position: fixed;
+      width: 5px;
+      height: 15px;
+      top: -100px;
+      opacity: 0.9;
+      z-index: 2;
+      animation: fall 3s linear infinite;
+    }
+
+    .confetti:nth-child(2n) { background-color: #ff5e78; }
+    .confetti:nth-child(3n) { background-color: #4db6ac; }
+    .confetti:nth-child(4n) { background-color: #9575cd; }
+    .confetti:nth-child(5n) { background-color: #f06292; }
+
+    /* Confetti fall animation */
+    @keyframes fall {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(800px) rotate(360deg); }
+    }
+
+    /* Full-screen styling for mobile landscape mode */
+    @media only screen and (max-width: 768px) and (orientation: landscape) {
+      .video-container video {
+        width: 100vw;
+        height: 100vh;
+      }
+    }
+
+    /* Rotate message box styling */
+    #rotateMessage {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      z-index: 15;
+      text-align: center;
+      font-size: 1.2em;
+    }
+
+    /* Fade-in effect for the greeting card */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Hide video container by default */
+    .video-container {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      width: 80vw;
+      height: auto;
+    }
+
+    .video-container video {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Greeting Card -->
+    <div class="greeting-card">
+      <h1>Happy Birthday Nanagaru!</h1>
+      <p>Wishing you a fantastic day filled with love, laughter, and joy!</p>
+      <p class="message">Thanks for always supporting us and being the best father a son could ask for. <br> -Abhi & Bunny</p>
+      <button onclick="showSurprise()">Click for a Surprise 🎉</button>
+    </div>
+  </div>
+
+  <!-- Balloons Section -->
+  <div class="balloons">
+    <div class="balloon balloon1"></div>
+    <div class="balloon balloon2"></div>
+    <div class="balloon balloon3"></div>
+    <div class="balloon balloon4"></div>
+    <div class="balloon balloon5"></div>
+    <div class="balloon balloon6"></div>
+    <div class="balloon balloon7"></div>
+    <div class="balloon balloon8"></div>
+  </div>
+
+  <!-- Hidden Video Container -->
+  <div class="video-container" id="videoContainer">
+    <video id="birthdayVideo" controls>
+      <source src="" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Rotate Message -->
+  <div id="rotateMessage">Please put phone in landscape mode</div>
+
+  <script>
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    let rotateMessageShown = false;
+
+    function showSurprise() {
+      const videoContainer = document.getElementById('videoContainer');
+      const video = document.getElementById('birthdayVideo');
+      const rotateMessage = document.getElementById('rotateMessage');
+
+      videoContainer.style.display = 'block';
+
+      // Only display the landscape prompt on mobile in portrait mode
+      if (isMobile && window.innerHeight > window.innerWidth) {
+        rotateMessage.style.display = 'block';
+        rotateMessageShown = true;
+      }
+      
+      video.play();
+    }
+
+    // Hide the landscape message if the orientation changes to landscape
+    window.addEventListener('orientationchange', function() {
+      const rotateMessage = document.getElementById('rotateMessage');
+      
+      if ((window.orientation === 90 || window.orientation === -90) && rotateMessageShown) {
+        rotateMessage.style.display = 'none';
+        rotateMessageShown = false;
+      }
+    });
+
+    // Generate confetti elements
+    for (let i = 0; i < 100; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+      document.body.appendChild(confetti);
+    }
+  </script>
+</body>
+</html>
