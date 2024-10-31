@@ -229,8 +229,9 @@
 
   <!-- Hidden Video Container -->
   <div class="video-container" id="videoContainer">
+    <button onclick="hideSurprise()">X</button>
     <video id="birthdayVideo" controls>
-      <source src="NanagaruHBD.mp4" type="video/mp4">
+      <source src="NanagaruHBDClear.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   </div>
@@ -275,6 +276,12 @@
       confetti.style.left = Math.random() * 100 + 'vw';
       confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
       document.body.appendChild(confetti);
+    }
+    function hideSurprise(){
+      const videoContainer = document.getElementById('videoContainer');
+      const video = document.getElementById('birthdayVideo');
+      video.pause();
+      videoContainer.style.display = "none";
     }
   </script>
 </body>
